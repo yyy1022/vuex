@@ -1,23 +1,74 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+import IndexLayout from '../layout/IndexLayout'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
-    name: 'Home',
-    component: Home
+    component: IndexLayout,
+    redirect: '/index',
+    children: [{
+      path: '/index',
+      component: () => import('../views/Index/Index'),
+      meta: {
+        title: '首页',
+        icon: 'el-icon-s-release'
+      }
+    }, {
+      path: '/share/forumPost',
+      component: () => import('../views/Share/ForumPost'),
+      meta: {
+        title: '分享',
+        icon: 'el-icon-s-release'
+      }
+    }]
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/index',
+    component: () => import('../views/Index/Index'),
+    meta: {
+      title: '首页',
+      icon: 'el-icon-s-release'
+    }
+  }, {
+    path: '/function',
+    redirect: '/function/table',
+    name: 'function',
+    component: IndexLayout,
+    meta: {
+      title: '功能',
+      icon: 'el-icon-s-release'
+    },
+    children: [
+      {
+        path: '/function/table',
+        component: () => import('../views/Function/Table'),
+        meta: {
+          title: 'Table表格',
+          icon: 'el-icon-s-release'
+        }
+      },
+      {
+        path: '/function/table2',
+        component: () => import('../views/Function/Table2'),
+        meta: {
+          title: 'Table表格2',
+          icon: 'el-icon-s-release'
+        }
+      }, {
+        path: '/function/upload',
+        component: () => import('../views/Function/Upload'),
+        meta: {
+          title: '上传',
+          icon: 'el-icon-s-release'
+        }
+      }
+    ]
   }
+  //   ]
+  // }
 ]
 
 const router = new VueRouter({
