@@ -26,7 +26,7 @@
           <i class="el-icon-s-data"></i>
           <span slot="title">首页</span>
         </el-menu-item>
-        <el-submenu index="">
+        <el-submenu index="/function">
           <template slot="title">
             <i class="el-icon-s-data"></i>
             <span slot="title">功能</span>
@@ -90,12 +90,12 @@
         handler (route) {
           debugger
           var state = localStorage.getItem('tacken')
-
           if (state == 'true') {
             this.keyPath = JSON.parse(localStorage.getItem('keyPath'))
             this.list = JSON.parse(localStorage.getItem('list'))
             this.titleText = localStorage.getItem('titleText')
-            this.activeIndex = localStorage.getItem('activeIndex')
+            this.activeIndex=route.fullPath
+            // this.activeIndex = localStorage.getItem('activeIndex')
           } else {
 
           }
@@ -141,7 +141,7 @@
             console.log(this.list)
             localStorage.setItem('activeIndex', this.activeIndex)
             localStorage.setItem('list', JSON.stringify(this.list))
-            localStorage.setItem('titleText', this.titleText)
+            // localStorage.setItem('titleText', this.titleText)
           } else {
             this.titleText = '首页'
           }
@@ -164,7 +164,7 @@
         localStorage.setItem('keyPath', JSON.stringify(keyPath))
         this.activeIndex = key
         this.keyPath = keyPath
-        localStorage.setItem('activeIndex', this.activeIndex)
+        // localStorage.setItem('activeIndex', this.activeIndex)
       },
       hide () {
         this.isCollapse = true
